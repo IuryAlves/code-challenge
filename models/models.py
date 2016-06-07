@@ -4,5 +4,5 @@
 from app import db
 
 
-class Document(db.Document):
+class Model(db.Document):
     pass
