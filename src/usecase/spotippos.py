@@ -18,16 +18,18 @@ def include_provinces(x, y):
     return list(find_provinces(x, y))
 
 
-def get_property(id):
+def get_property(id, as_dict=True):
     try:
         property_ = Property.objects.get(pk=id)
     except DoesNotExist:
         return None
     else:
-        provinces = include_provinces(property_.x, property_.y)
-        dic = property_.to_dict()
-        dic['provinces'] = provinces
-        return dic
+        if as_dict:
+            provinces = include_provinces(property_.x, property_.y)
+            dic = property_.to_dict()
+            dic['provinces'] = provinces
+            return dic
+        return property_
 
 
 def find_by_area(**kwargs):

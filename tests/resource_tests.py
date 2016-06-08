@@ -24,6 +24,28 @@ class ResourcesTestCase(unittest.TestCase):
             squareMeters=42
         ).save()
 
+    def test_delete_property(self):
+        response = self.client.delete('/properties/{id}'.format(id=self.propertie_1.id))
+
+        self.assertEqual(response.status_code, 204)
+
+    def test_delete_inexistent_property(self):
+        response = self.client.delete('/properties/{id}'.format(id='7867asdasd3434'))
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 404)
+        self.assertDictEqual(content,
+                             {u'message': u'property with id '
+                                          u'7867asdasd3434 does not exist.'})
+
+    def test_delete_property_with_missing_params(self):
+        response = self.client.delete('/properties/')
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertDictEqual(content,
+                             {u'message': u'You must provide an id'})
+
     def test_post_properties_invalid_square_meters(self):
         data = {
             "x": 500,

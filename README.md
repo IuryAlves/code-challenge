@@ -186,6 +186,43 @@ Just save your `fixture.json` file inside models/fixtures and then do:
             "properties": []
         }
 
+**Delete a property**
+
+* **URL**
+
+        /properties
+
+* **Method:**
+
+        DELETE
+
+* **Params**
+
+
+    **Required:**
+
+        id=[string],
+
+* **Success Response:**
+
+      * **Code:** 204 NO CONTENT
+
+* **Error Response:**
+
+      * **Code:** 404 NOT FOUND
+      * **Content:**
+                {
+                    "message": "string"
+                }
+
+      OR
+
+      * **Code:** 400 BAD REQUEST
+
+* **Sample Call:**
+
+        curl -X DELETE http://localhost:5000/properties/432432342
+
 
 
 ## Contributing <a name='contributing'></a>

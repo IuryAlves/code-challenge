@@ -3,6 +3,7 @@ from __future__ import absolute_import
 
 from flask import Blueprint
 from flask_restful import Api, reqparse, abort
+from mongoengine import DoesNotExist, ValidationError
 
 from src.usecase import spotippos
 from src.resources import Resource
@@ -12,8 +13,21 @@ blueprint = Blueprint('properties', __name__)
 api = Api(blueprint)
 
 
-@api.resource('/properties', '/properties/<string:id>')
+@api.resource('/properties', '/properties/', '/properties/<string:id>')
 class PropertiesResource(Resource):
+
+    def delete(self, id=None):
+        if id is None:
+            abort(400, message="You must provide an id")
+        try:
+            property_ = spotippos.get_property(id, as_dict=False)
+        except (DoesNotExist, ValidationError):
+            return {
+                "message": 'property with id {id} does not exist.'.format(id=id)
+            }, 404
+        else:
+            property_.delete()
+            return {}, 204
 
     def post(self):
         args = parse_property_arguments()
