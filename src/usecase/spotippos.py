@@ -9,47 +9,32 @@ from __future__ import (
 from mongoengine import DoesNotExist
 from raise_if import raise_if
 
-from src.models.propertie import Propertie
+from src.models.propertie import Property
 from src.exceptions import ValidationError
+from .provinces import find_provinces
 
 
-class Province(object):
-
-    def __init__(self, point1, point2):
-        self.ax, self.ay = point1
-        self.bx, self.by = point2
-
-    def __repr__(self):
-        return '{cls}(({p1}, {p2}), ({p3}, {p4}))'.format(
-            cls=self.__class__.__name__,
-            p1=self.ax,
-            p2=self.bx,
-            p3=self.ay,
-            p4=self.by
-        )
-
-gode = Province((0, 1000),
-                (600, 500))
-ruja = Province((400, 1000),
-                (1110, 500))
-
-provinces = (
-    gode,
-    ruja
-)
+def include_provinces(x, y):
+    return list(find_provinces(x, y))
 
 
 def get_property(id):
     try:
-        property = Propertie.objects.get(pk=id)
+        property_ = Property.objects.get(pk=id)
     except DoesNotExist:
         return None
     else:
-        return property
+        provinces = include_provinces(property_.x, property_.y)
+        dic = property_.to_dict()
+        dic['provinces'] = provinces
+        return dic
 
 
 def find_by_area(**kwargs):
-    return Propertie.find_in_area(**kwargs)
+    for property_ in Property.find_in_area(**kwargs):
+        dic = property_.to_dict()
+        dic['provinces'] = include_provinces(property_.x, property_.y)
+        yield dic
 
 
 def save_property(**kwargs):
@@ -83,4 +68,4 @@ def save_property(**kwargs):
              ValidationError,
              'squareMeters cannot be greater than 240 or lower than 20.'
              )
-    return Propertie(**kwargs).save()
+    return Property(**kwargs).save()

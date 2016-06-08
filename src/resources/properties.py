@@ -32,16 +32,14 @@ class PropertiesResource(Resource):
             abort(400, message="You must provide an id or a query string with "
                                "'ax', 'bx', 'ay', 'by")
         if id is not None:
-            property = spotippos.get_property(id)
-            if property is None:
+            property_dic = spotippos.get_property(id)
+            if property_dic is None:
                 abort(404)
             else:
-                return property.to_dict()
+                return property_dic
         else:
-            properties = spotippos.find_by_area(**args)
+            properties = list(spotippos.find_by_area(**args))
             return {
                 "foundProperties": len(properties),
-                "properties": [
-                    property.to_dict() for property in properties
-                ]
+                "properties": properties
             }

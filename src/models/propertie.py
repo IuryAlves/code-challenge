@@ -4,7 +4,7 @@
 from src.app import db
 
 
-class Propertie(db.Document):
+class Property(db.Document):
     x = db.IntField(required=True)
     y = db.IntField(required=True)
     title = db.StringField(required=False)

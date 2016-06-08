@@ -4,14 +4,15 @@ import json
 import unittest
 
 from src.app import app
-from src.models.propertie import Propertie
+from src.models.propertie import Property
 
 
 class ResourcesTestCase(unittest.TestCase):
 
     def setUp(self):
+        self.maxDiff = None
         self.client = app.test_client()
-        self.propertie_1 = Propertie(
+        self.propertie_1 = Property(
             title="Imóvel código 665, com 1 quarto e 1 banheiro",
             price=540000,
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -23,7 +24,7 @@ class ResourcesTestCase(unittest.TestCase):
         ).save()
 
     def tearDown(self):
-        Propertie.drop_collection()
+        Property.drop_collection()
 
     def test_post_properties_invalid_square_meters(self):
         data = {
@@ -143,9 +144,11 @@ class ResourcesTestCase(unittest.TestCase):
         response = self.client.get(
             "/properties/{id}".format(id=self.propertie_1.id))
         content = json.loads(response.data)
+        property_ = self.propertie_1.to_dict()
+        property_['provinces'] = ['Ruja']
 
         self.assertEqual(response.status_code, 200)
-        self.assertDictEqual(self.propertie_1.to_dict(), content)
+        self.assertDictEqual(property_, content)
 
     def test_get_property_with_insufficient_params(self):
         response = self.client.get("/properties")
@@ -172,9 +175,10 @@ class ResourcesTestCase(unittest.TestCase):
             by=by
         ))
         content = json.loads(response.data)
-
+        property_ = self.propertie_1.to_dict()
+        property_['provinces'] = [u'Ruja']
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(content, {
             'foundProperties': 1,
-            'properties': [self.propertie_1.to_dict()]
+            'properties': [property_]
         })
