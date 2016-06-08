@@ -12,6 +12,7 @@ class ResourcesTestCase(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
         self.client = app.test_client()
+        Property.drop_collection()
         self.propertie_1 = Property(
             title="Imóvel código 665, com 1 quarto e 1 banheiro",
             price=540000,
@@ -22,9 +23,6 @@ class ResourcesTestCase(unittest.TestCase):
             baths=1,
             squareMeters=42
         ).save()
-
-    def tearDown(self):
-        Property.drop_collection()
 
     def test_post_properties_invalid_square_meters(self):
         data = {

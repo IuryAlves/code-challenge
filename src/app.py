@@ -17,5 +17,6 @@ if enable_cors:
 db = MongoEngine(app)
 
 from resources import properties
+from models.properties import Property
 
 app.register_blueprint(properties.blueprint)

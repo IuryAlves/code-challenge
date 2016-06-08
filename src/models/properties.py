@@ -7,9 +7,9 @@ from src.app import db
 class Property(db.Document):
     x = db.IntField(required=True)
     y = db.IntField(required=True)
-    title = db.StringField(required=True)
-    price = db.FloatField(required=True)
-    description = db.StringField(required=True)
+    title = db.StringField(required=False)
+    price = db.FloatField(required=False)
+    description = db.StringField(required=False)
     beds = db.IntField(required=True)
     baths = db.IntField(required=True)
     squareMeters = db.FloatField(required=True)

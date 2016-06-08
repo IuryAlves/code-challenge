@@ -3,9 +3,10 @@
 
 # Table of contents
 1. [Installing](#installing)
-2. [running](#running)
-3. [API](#api)
-4. [Contributing](#contributing)
+2. [Loading initial data](#loading_data_in_bulk)
+3. [Running](#running)
+4. [API](#api)
+5. [Contributing](#contributing)
 
 
 
@@ -41,7 +42,15 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
         mkdir -p data/db # in any directory you like
         mongod --dbpath data/db
 
+## Loading Data <a name="loading_data_in_bulk"></a>
 
+If you have some initial data that you want to load, you can use `load_data.py`
+
+Just save your `fixture.json` file inside models/fixtures and then do:
+
+    python src/load_data.py --fixture=<your_fixture_file.json>
+
+   
 ## Running <a name="running"></a>
 
     python src/run.py
