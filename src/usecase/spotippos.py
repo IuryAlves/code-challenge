@@ -7,6 +7,7 @@ from __future__ import (
 )
 
 from mongoengine import DoesNotExist
+from raise_if import raise_if
 
 from src.models.propertie import Propertie
 from src.exceptions import ValidationError
@@ -58,28 +59,28 @@ def save_property(**kwargs):
     baths = kwargs.get("baths")
     square_meters = kwargs.get("squareMeters")
 
-    if x < 0 or x > 1400:
-        raise ValidationError(
-            'x value cannot be lower than zero or greater than 1400.'
-            'x is {}'.format(x)
-        )
-    elif y < 0 or y > 1000:
-        raise ValidationError(
-            'y value cannot be lower than zero or greater than 1000.'
-            'y is {}'.format(y)
-        )
+    raise_if(x < 0 or x > 1400,
+             ValidationError,
+             'x value cannot be lower than zero or greater than 1400.'
+             'x is {}'.format(x)
+             )
+    raise_if(y < 0 or y > 1000,
+             ValidationError,
+             'y value cannot be lower than zero or greater than 1000.'
+             'y is {}'.format(y)
+             )
 
-    elif beds > 5 or beds < 1:
-        raise ValidationError(
-            'The number of beds cannot be lower than 1 or greater than 5'
-        )
-    elif baths > 4 or baths < 1:
-        raise ValidationError(
-            'The number of baths cannot be lower than 1 or greater than 4'
-        )
+    raise_if(beds > 5 or beds < 1,
+             ValidationError,
+             'The number of beds cannot be lower than 1 or greater than 5'
+             )
+    raise_if(baths > 4 or baths < 1,
+             ValidationError,
+             'The number of baths cannot be lower than 1 or greater than 4'
+             )
 
-    elif square_meters > 240 or square_meters < 20:
-        raise ValidationError(
-            'squareMeters cannot be greater than 240 or lower than 20.'
-        )
-    property = Propertie(**kwargs).save()
+    raise_if(square_meters > 240 or square_meters < 20,
+             ValidationError,
+             'squareMeters cannot be greater than 240 or lower than 20.'
+             )
+    return Propertie(**kwargs).save()
