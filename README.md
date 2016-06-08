@@ -11,14 +11,15 @@
 
 ## Installing <a name="installing"></a>
 
-* Install python3
+* Install python and pip
+
 * Install virtualenv
 
         pip install virtualenv
 
 * Create a virtualenv
 
-        virtualenv venv --python=python3
+        virtualenv venv
         source venv/bin/activate
 
 * Install requirements
@@ -47,8 +48,121 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
 
 ## API <a name="api"></a>
 
-TODO
+**Title**
+----
+  Creates a new property
+
+* **URL**
+
+        /properties
+
+* **Method:**
+
+        POST
+
+* **Data Params**
+*
+    **Required:**
+
+        x=[integer],
+        y=[integer],
+        title=[string],
+        price=[number],
+        description=[string],
+        beds=[int],
+        baths=[int],
+        squareMeters=[int]
+
+* **Success Response:**
+
+      * **Code:** 201 CREATED
+
+* **Error Response:**
+
+      * **Code:** 422 UNPROCESSABLE ENTRY
+      * **Content:**
+                {
+                    "message": "string"
+                }
+
+      OR
+
+      * **Code:** 400 BAD REQUEST
+
+* **Sample Call:**
+
+        curl --data "zip_code=14020260" localhost:5000/properties
+
+**Title**
+----
+  Gets a property by id
+
+* **URL**
+
+        /properties/
+
+* **Method:**
+
+         GET
+
+*  **URL Params**
+
+    **Optional:**
+
+           id=[string]
+        or
+           ax=[string]
+           bx=[string]
+           ay=[string]
+           by=[string]
+
+* **Success Response:**
+
+      * **Code:** 200 OK
+      * **Content:**
+
+            {
+                "x": 222,
+                "y": 444,
+                "title": u"Imóvel código 1, com 5 quartos e 4 banheiros",
+                "price": 1250000,
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "beds": 4,
+                "baths": 3,
+                provinces: ["Ruja"]
+            }
+
+* **Error Response:**
+
+      * **Code:** 400 BAD REQUEST
+      * **Content:**
+                {
+                    "message": "You must provide an id or a query string with 'ax', 'bx', 'ay', 'by."
+                }
+
+      OR
+
+      * **Code:** 404 NOT FOUND
+      * **Content:**
+                {
+                    "message":  "property with id 4f4381f4e779897a2c000009 not found."
+                }
+
+
+* **Sample Call:**
+
+        curl localhost:5000/properties/140223323232
+        curl localhost:5000/zipcode/?ax=10&bx=20&ay=30&by=40
+
 
 ## Contributing <a name='contributing'></a>
 
-TODO
+
+* Install development requirements
+
+    pip install -r requirements/dev_requirements.txt
+
+* Run the tests and flake8
+
+    tox
+
