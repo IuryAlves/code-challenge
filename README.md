@@ -18,7 +18,6 @@
     │   ├── app.py
     │   ├── decorators.py
     │   ├── exceptions.py
-    │   ├── __init__.py
     │   ├── load_data.py
     │   ├── models/
     │   │   ├── fixtures/
