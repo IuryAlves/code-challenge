@@ -3,7 +3,8 @@ from __future__ import absolute_import
 
 from flask import Blueprint
 from flask_restful import Api, Resource, reqparse, abort
-from models.propertie import Propertie
+
+from src.models.propertie import Propertie
 from .utils import parse_property_arguments
 
 blueprint = Blueprint('properties', __name__)

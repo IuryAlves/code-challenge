@@ -1,7 +1,7 @@
 # coding: utf-8
 
 
-from app import db
+from src.app import db
 
 
 class Propertie(db.Document):

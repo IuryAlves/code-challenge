@@ -6,7 +6,7 @@ from flask.ext.cors import CORS
 
 app = Flask(__name__)
 
-app.config.from_object('settings')
+app.config.from_object('src.settings')
 
 enable_cors = app.config.get("ENABLE_CORS", False)
 if enable_cors:
