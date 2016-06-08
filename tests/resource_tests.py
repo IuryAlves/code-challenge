@@ -23,7 +23,7 @@ class ResourcesTestCase(unittest.TestCase):
         ).save()
 
     def tearDown(self):
-        pass
+        Propertie.drop_collection()
 
     def test_post_properties(self):
         data = {
@@ -50,3 +50,17 @@ class ResourcesTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(self.propertie_1.to_dict(), content)
 
+    def test_search(self):
+        ax, bx = (700, 300)
+        ay, by = (600, 400)
+
+        response = self.client.get("/properties?ax={ax}&bx={bx}&ay={ay}&by={by}".format(
+            ax=ax,
+            bx=bx,
+            ay=ay,
+            by=by
+        ))
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertListEqual(content, [self.propertie_1.to_dict()])
