@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/IuryAlves/code-challenge.svg?branch=master)](https://travis-ci.org/IuryAlves/code-challenge)
+[![Coverage Status](https://coveralls.io/repos/github/IuryAlves/code-challenge/badge.svg?branch=master)](https://coveralls.io/github/IuryAlves/code-challenge?branch=master)
+
 # Table of contents
 1. [Installing](#installing)
 2. [running](#running)
