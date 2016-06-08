@@ -32,6 +32,7 @@ class Property(db.Document):
 
     def to_dict(self):
         return {
+            'id': str(self.id),
             'x': self.x,
             'y': self.y,
             'title': self.title,
