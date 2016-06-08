@@ -93,7 +93,7 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
         curl -H "Content-Type: application/json" -X POST -d '{"x": 222,"y": 444, "title": "Imóvel código 1, com 5 quartos e 4 banheiros","price": 1250000, "description": "Lorem ipsum","beds": 4,"baths": 3, "squareMeters": 200}' http://localhost:5000/properties
 
 
-** Get a property by id**
+**Get a property**
 
 * **URL**
 
