@@ -148,7 +148,7 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
 * **Sample Call:**
 
         curl localhost:5000/properties/140223323232
-        curl localhost:5000/zipcode/?ax=10&bx=20&ay=30&by=40
+        curl localhost:5000/properties/?ax=10&bx=20&ay=30&by=40
 
         {
             "foundProperties": 0,
