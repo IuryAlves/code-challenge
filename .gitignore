@@ -1,0 +1,9 @@
+.idea
+__pycache__
+data
+venv
+update
+htmlcov
+.tox
+.coverage
+/**/*.pyc
