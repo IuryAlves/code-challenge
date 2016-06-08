@@ -2,6 +2,7 @@
 
 import json
 import unittest
+
 from app import app
 from models.propertie import Propertie
 
@@ -18,7 +19,6 @@ class ResourcesTestCase(unittest.TestCase):
             y=556,
             beds=1,
             baths=1,
-            provinces=["Ruja"],
             squareMeters=42
         ).save()
 
@@ -35,14 +35,32 @@ class ResourcesTestCase(unittest.TestCase):
             "beds": 4,
             "baths": 3,
             "squareMeters": 210,
-            "provinces": ['Scavy']
         }
 
         response = self.client.post("/properties", data=data)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
 
-    def test_get_propertie(self):
+    def test_post_insufficient_params(self):
+        data = {
+            "x": 222,
+            "y": 444,
+            "title": u"Imóvel código 1, com 5 quartos e 4 banheiros",
+            "price": 1250000,
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "beds": 4,
+            "baths": 3,
+        }
+        response = self.client.post("/properties", data=data)
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertDictEqual(content, {
+            u'message': {
+                u'squareMeters': u'Missing required parameter in the JSON body'
+                                 u' or the post body or the query string'}})
+
+    def test_get_property_by_id(self):
 
         response = self.client.get("/properties/{id}".format(id=self.propertie_1.id))
         content = json.loads(response.data)
@@ -50,7 +68,20 @@ class ResourcesTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertDictEqual(self.propertie_1.to_dict(), content)
 
-    def test_search(self):
+    def test_get_property_with_insufficient_params(self):
+        response = self.client.get("/properties")
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertDictEqual(content, {
+            u'message': u"You must provide an id or a query string with 'ax', 'bx', 'ay', 'by"})
+
+    def test_get_property_invalid_id(self):
+        response = self.client.get("/properties/{id}".format(id=10))
+
+        self.assertEqual(response.status_code, 404)
+
+    def test_get_properties_by_area(self):
         ax, bx = (700, 300)
         ay, by = (600, 400)
 

@@ -12,7 +12,6 @@ class Propertie(db.Document):
     description = db.StringField(required=False)
     beds = db.IntField(required=True)
     baths = db.IntField(required=True)
-    provinces = db.DynamicField(required=False)
     squareMeters = db.FloatField(required=True)
 
     @classmethod
