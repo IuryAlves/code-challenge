@@ -168,8 +168,8 @@ class ResourcesTestCase(unittest.TestCase):
                              {u'message': u'property with id 4f4381f4e779897a2c000009 not found.'})
 
     def test_get_properties_by_area(self):
-        ax, bx = (700, 300)
-        ay, by = (600, 400)
+        ax, bx = (700, 600)
+        ay, by = (400, 700)
 
         response = self.client.get("/properties?ax={ax}&bx={bx}&ay={ay}&by={by}".format(
             ax=ax,

@@ -24,8 +24,8 @@ class Property(db.Document):
         properties = cls.objects(
             x__lte=ax,
             x__gte=bx,
-            y__lte=ay,
-            y__gte=by
+            y__gte=ay,
+            y__lte=by
         )
 
         return properties

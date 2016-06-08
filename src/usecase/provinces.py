@@ -90,9 +90,9 @@ def find_provinces(x, y):
     """
     for province in provinces:
         if (x > province.ax and
-                x < province.bx and
-                y > province.by and
-                y < province.ay):
+            x < province.bx and
+            y > province.by and
+            y < province.ay):
             yield repr(province)
 
 if __name__ == '__main__':
