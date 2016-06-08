@@ -3,4 +3,4 @@ source =
     app/
 omit =
     tests/*
-    src/load_data.py
+    app/load_data.py
