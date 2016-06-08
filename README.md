@@ -44,7 +44,7 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
 
 ## Running <a name="running"></a>
 
-    python run.py
+    python src/run.py
 
 ## API <a name="api"></a>
 
@@ -61,7 +61,8 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
         POST
 
 * **Data Params**
-*
+
+
     **Required:**
 
         x=[integer],
@@ -91,7 +92,8 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
 
 * **Sample Call:**
 
-        curl --data "zip_code=14020260" localhost:5000/properties
+        curl -H "Content-Type: application/json" -X POST -d '{"x": 222,"y": 444, "title": "Imóvel código 1, com 5 quartos e 4 banheiros","price": 1250000, "description": "Lorem ipsum","beds": 4,"baths": 3, "squareMeters": 200}' http://localhost:5000/properties
+
 
 **Title**
 ----
@@ -106,8 +108,6 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
          GET
 
 *  **URL Params**
-
-    **Optional:**
 
            id=[string]
         or
@@ -129,7 +129,7 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 "beds": 4,
                 "baths": 3,
-                provinces: ["Ruja"]
+                "provinces": ["Ruja"]
             }
 
 * **Error Response:**
@@ -154,15 +154,21 @@ If you don't have sudo permissions or don't want use sudo, you can specify the `
         curl localhost:5000/properties/140223323232
         curl localhost:5000/zipcode/?ax=10&bx=20&ay=30&by=40
 
+        {
+            "foundProperties": 0,
+            "properties": []
+        }
+
+
 
 ## Contributing <a name='contributing'></a>
 
 
 * Install development requirements
 
-    pip install -r requirements/dev_requirements.txt
+        pip install -r requirements/dev_requirements.txt
 
 * Run the tests and flake8
 
-    tox
+        tox
 
