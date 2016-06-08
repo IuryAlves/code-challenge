@@ -25,6 +25,84 @@ class ResourcesTestCase(unittest.TestCase):
     def tearDown(self):
         Propertie.drop_collection()
 
+    def test_post_properties_invalid_square_meters(self):
+        data = {
+            "x": 500,
+            "y": 800,
+            "title": u"Imóvel código 1, com 5 quartos e 4 banheiros",
+            "price": 1250000,
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "beds": 3,
+            "baths": 2,
+            "squareMeters": 250,
+        }
+
+        response = self.client.post("/properties", data=data)
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 422)
+        self.assertDictEqual(content,
+                             {u'message': u'squareMeters cannot be greater than 240 or lower than 20.'})
+
+    def test_post_properties_invalid_number_of_bathrooms(self):
+        data = {
+            "x": 500,
+            "y": 800,
+            "title": u"Imóvel código 1, com 5 quartos e 4 banheiros",
+            "price": 1250000,
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "beds": 3,
+            "baths": 0,
+            "squareMeters": 210,
+        }
+
+        response = self.client.post("/properties", data=data)
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 422)
+        self.assertDictEqual(content,
+                             {u'message': u'The number of baths cannot be lower than 1 or greater than 4'})
+
+    def test_post_properties_invalid_number_of_beds(self):
+        data = {
+            "x": 500,
+            "y": 800,
+            "title": u"Imóvel código 1, com 5 quartos e 4 banheiros",
+            "price": 1250000,
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "beds": 10,
+            "baths": 3,
+            "squareMeters": 210,
+        }
+
+        response = self.client.post("/properties", data=data)
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 422)
+        self.assertDictEqual(content,
+                             {u'message': u'The number of beds cannot be lower than 1 or greater than 5'})
+
+    def test_post_properties_out_of_bounds(self):
+        data = {
+            "x": 1500,
+            "y": 1200,
+            "title": u"Imóvel código 1, com 5 quartos e 4 banheiros",
+            "price": 1250000,
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "beds": 4,
+            "baths": 3,
+            "squareMeters": 210,
+        }
+
+        response = self.client.post("/properties", data=data)
+        content = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 422)
+        self.assertDictEqual(content,
+                             {u'message':
+                              u'x value cannot be lower than zero'
+                              u' or greater than 1400.x is 1500'})
+
     def test_post_properties(self):
         data = {
             "x": 222,
@@ -62,7 +140,8 @@ class ResourcesTestCase(unittest.TestCase):
 
     def test_get_property_by_id(self):
 
-        response = self.client.get("/properties/{id}".format(id=self.propertie_1.id))
+        response = self.client.get(
+            "/properties/{id}".format(id=self.propertie_1.id))
         content = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -77,7 +156,8 @@ class ResourcesTestCase(unittest.TestCase):
             u'message': u"You must provide an id or a query string with 'ax', 'bx', 'ay', 'by"})
 
     def test_get_property_invalid_id(self):
-        response = self.client.get("/properties/{id}".format(id=10))
+        response = self.client.get(
+            "/properties/{id}".format(id="4f4381f4e779897a2c000009"))
 
         self.assertEqual(response.status_code, 404)
 

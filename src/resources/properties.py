@@ -2,9 +2,10 @@
 from __future__ import absolute_import
 
 from flask import Blueprint
-from flask_restful import Api, Resource, reqparse, abort
+from flask_restful import Api, reqparse, abort
 
-from src.models.propertie import Propertie
+from src.usecase import spotippos
+from src.resources import Resource
 from .utils import parse_property_arguments
 
 blueprint = Blueprint('properties', __name__)
@@ -16,7 +17,7 @@ class PropertiesResource(Resource):
 
     def post(self):
         args = parse_property_arguments()
-        Propertie(**args).save()
+        spotippos.save_property(**args)
         return {}, 201
 
     def get(self, id=None):
@@ -31,7 +32,10 @@ class PropertiesResource(Resource):
             abort(400, message="You must provide an id or a query string with "
                                "'ax', 'bx', 'ay', 'by")
         if id is not None:
-            user = Propertie.objects.get_or_404(id=id)
-            return user.to_dict()
+            property = spotippos.get_property(id)
+            if property is None:
+                abort(404)
+            else:
+                return property.to_dict()
         else:
-            return Propertie.find_in_area(**args)
+            return spotippos.find_by_area(**args)
