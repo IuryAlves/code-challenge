@@ -34,7 +34,7 @@ class PropertiesResource(Resource):
         if id is not None:
             property_dic = spotippos.get_property(id)
             if property_dic is None:
-                abort(404)
+                abort(404, message="property with id {} not found.".format(id))
             else:
                 return property_dic
         else:

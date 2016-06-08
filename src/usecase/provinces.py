@@ -84,9 +84,9 @@ provinces = (
 def find_provinces(x, y):
     """
     >>> list(find_provinces(999, 333))
-    [Nova((800, 1400), (500, 0))]
+    ['Nova']
     >>> list(find_provinces(870, 867))
-    [Ruja((400, 1110), (1000, 500))]
+    ['Ruja']
     """
     for province in provinces:
         if (x > province.ax and
@@ -94,3 +94,7 @@ def find_provinces(x, y):
                 y > province.by and
                 y < province.ay):
             yield repr(province)
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()

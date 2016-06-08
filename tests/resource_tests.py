@@ -161,8 +161,11 @@ class ResourcesTestCase(unittest.TestCase):
     def test_get_property_invalid_id(self):
         response = self.client.get(
             "/properties/{id}".format(id="4f4381f4e779897a2c000009"))
+        content = json.loads(response.data)
 
         self.assertEqual(response.status_code, 404)
+        self.assertDictEqual(content,
+                             {u'message': u'property with id 4f4381f4e779897a2c000009 not found.'})
 
     def test_get_properties_by_area(self):
         ax, bx = (700, 300)
