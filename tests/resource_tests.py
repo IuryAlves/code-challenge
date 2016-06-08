@@ -4,7 +4,7 @@ import json
 import unittest
 
 from src.app import app
-from src.models.propertie import Property
+from src.models.properties import Property
 
 
 class ResourcesTestCase(unittest.TestCase):
