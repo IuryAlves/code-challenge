@@ -174,4 +174,7 @@ class ResourcesTestCase(unittest.TestCase):
         content = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
-        self.assertListEqual(content, [self.propertie_1.to_dict()])
+        self.assertDictEqual(content, {
+            'foundProperties': 1,
+            'properties': [self.propertie_1.to_dict()]
+        })

@@ -28,7 +28,7 @@ class Propertie(db.Document):
             y__gte=by
         )
 
-        return [propertie.to_dict() for propertie in properties]
+        return properties
 
     def to_dict(self):
         return {

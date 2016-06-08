@@ -38,4 +38,10 @@ class PropertiesResource(Resource):
             else:
                 return property.to_dict()
         else:
-            return spotippos.find_by_area(**args)
+            properties = spotippos.find_by_area(**args)
+            return {
+                "foundProperties": len(properties),
+                "properties": [
+                    property.to_dict() for property in properties
+                ]
+            }
