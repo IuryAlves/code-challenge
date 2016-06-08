@@ -7,7 +7,7 @@ from __future__ import (
 )
 
 import flask_restful
-from src.decorators import on_exception
+from app.decorators import on_exception
 
 
 class Resource(flask_restful.Resource):

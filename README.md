@@ -14,7 +14,7 @@
     ├── requirements
     │   ├── dev_requirements.txt
     │   └── requirements.txt
-    ├── src
+    ├── app
     │   ├── app.py
     │   ├── decorators.py
     │   ├── exceptions.py
@@ -69,12 +69,12 @@ If you have some initial data that you want to load, you can use `load_data.py`
 
 Just save your `fixture.json` file inside models/fixtures and then do:
 
-    python src/load_data.py --fixture=<your_fixture_file.json>
+    python app/load_data.py --fixture=<your_fixture_file.json>
 
 
 ## Running <a name="running"></a>
 
-    python src/run.py
+    python app/run.py
 
 ## API <a name="api"></a>
 
@@ -234,4 +234,3 @@ Just save your `fixture.json` file inside models/fixtures and then do:
 * Run the tests and flake8
 
         tox
-

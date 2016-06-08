@@ -1,6 +1,6 @@
 [run]
 source =
-    src/
+    app/
 omit =
     tests/*
     src/load_data.py

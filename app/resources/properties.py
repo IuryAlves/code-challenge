@@ -5,9 +5,9 @@ from flask import Blueprint
 from flask_restful import Api, reqparse, abort
 from mongoengine import DoesNotExist, ValidationError
 
-from src.app import cache
-from src.usecase import spotippos
-from src.resources import Resource
+from app import cache
+from app.usecase import spotippos
+from app.resources import Resource
 from .utils import parse_property_arguments
 
 blueprint = Blueprint('properties', __name__)

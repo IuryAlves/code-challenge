@@ -9,8 +9,8 @@ from __future__ import (
 from mongoengine import DoesNotExist
 from raise_if import raise_if
 
-from src.models.properties import Property
-from src.exceptions import ValidationError
+from app.models.properties import Property
+from app.exceptions import ValidationError
 from .provinces import find_provinces
 
 

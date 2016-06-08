@@ -3,8 +3,8 @@
 import json
 import unittest
 
-from src.app import app
-from src.models.properties import Property
+from app import app
+from app.models.properties import Property
 
 
 class ResourcesTestCase(unittest.TestCase):

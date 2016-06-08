@@ -8,7 +8,7 @@ from __future__ import (
 
 from contextlib import wraps
 from flask_restful import abort
-from src.exceptions import ValidationError
+from app.exceptions import ValidationError
 
 
 def on_exception(func):

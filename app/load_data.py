@@ -28,7 +28,10 @@ def parse_args():
 def main(base_path):
     properties_to_save = []
     args = parse_args()
-    path = os.path.sep.join([base_path, 'src', args.fixture_folder, args.fixture])
+    path = os.path.sep.join([base_path,
+                             'app',
+                             args.fixture_folder,
+                             args.fixture])
     with open(path) as file_:
         data = json.load(file_)
     properties = data['properties']
@@ -41,7 +44,7 @@ def main(base_path):
 
 
 if __name__ == '__main__':
-    from models.properties import Property
+    from app.models.properties import Property
     base_path = get_path()
     out = main(base_path)
     print("{} objects saved".format(out))
