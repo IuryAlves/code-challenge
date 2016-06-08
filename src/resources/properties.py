@@ -17,8 +17,8 @@ class PropertiesResource(Resource):
 
     def post(self):
         args = parse_property_arguments()
-        spotippos.save_property(**args)
-        return {}, 201
+        property_ = spotippos.save_property(**args)
+        return spotippos.get_property(property_.id), 201
 
     def get(self, id=None):
         parser = reqparse.RequestParser()

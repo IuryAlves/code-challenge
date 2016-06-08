@@ -50,7 +50,7 @@ Just save your `fixture.json` file inside models/fixtures and then do:
 
     python src/load_data.py --fixture=<your_fixture_file.json>
 
-   
+
 ## Running <a name="running"></a>
 
     python src/run.py
