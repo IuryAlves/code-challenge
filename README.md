@@ -9,6 +9,28 @@
 5. [Contributing](#contributing)
 
 
+## Project structure
+
+    ├── requirements
+    │   ├── dev_requirements.txt
+    │   └── requirements.txt
+    ├── src
+    │   ├── app.py
+    │   ├── decorators.py
+    │   ├── exceptions.py
+    │   ├── __init__.py
+    │   ├── load_data.py
+    │   ├── models/
+    │   │   ├── fixtures/
+    │   ├── resources/
+    │   ├── run.py
+    │   ├── settings.py
+    │   ├── shell.py
+    │   └── usecase/
+    ├── tests/
+    ├── tox.ini
+    ├── README.md
+
 
 ## Installing <a name="installing"></a>
 
