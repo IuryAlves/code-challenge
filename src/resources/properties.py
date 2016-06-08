@@ -5,6 +5,7 @@ from flask import Blueprint
 from flask_restful import Api, reqparse, abort
 from mongoengine import DoesNotExist, ValidationError
 
+from src.app import cache
 from src.usecase import spotippos
 from src.resources import Resource
 from .utils import parse_property_arguments
@@ -34,6 +35,7 @@ class PropertiesResource(Resource):
         property_ = spotippos.save_property(**args)
         return spotippos.get_property(property_.id), 201
 
+    @cache.memoize(timeout=100)
     def get(self, id=None):
         parser = reqparse.RequestParser()
         parser.add_argument('ax')
