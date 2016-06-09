@@ -16,7 +16,6 @@
     │   ├── dev_requirements.txt
     │   └── requirements.txt
     ├── app
-    │   ├── app.py
     │   ├── decorators.py
     │   ├── exceptions.py
     │   ├── load_data.py
