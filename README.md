@@ -2,14 +2,15 @@
 [![Coverage Status](https://coveralls.io/repos/github/IuryAlves/code-challenge/badge.svg?branch=master)](https://coveralls.io/github/IuryAlves/code-challenge?branch=master)
 
 # Table of contents
-1. [Installing](#installing)
-2. [Loading initial data](#loading_data_in_bulk)
-3. [Running](#running)
-4. [API](#api)
-5. [Developing](#developing)
+1. [Project Structure](#structure)
+2. [Installing](#installing)
+3. [Loading initial data](#loading_data_in_bulk)
+4. [Running](#running)
+5. [API](#api)
+6. [Developing](#developing)
 
 
-## Project structure
+## Project structure <a name="structure"></a>
 
     ├── requirements
     │   ├── dev_requirements.txt
