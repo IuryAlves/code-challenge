@@ -6,7 +6,7 @@
 2. [Loading initial data](#loading_data_in_bulk)
 3. [Running](#running)
 4. [API](#api)
-5. [Contributing](#contributing)
+5. [Developing](#developing)
 
 
 ## Project structure
@@ -224,7 +224,7 @@ Just save your `fixture.json` file inside models/fixtures and then do:
 
 
 
-## Contributing <a name='contributing'></a>
+## Developing <a name='developing'></a>
 
 
 * Install development requirements
